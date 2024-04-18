@@ -4,9 +4,9 @@ function getComputerChoice(){
     return choicesArray[i]
 }
 
-function playRound(playerSelection, computerSelection){
+function playRound(playerSelection){
     const player = playerSelection.toLowerCase();
-    const computer = computerSelection.toLowerCase();
+    const computer = getComputerChoice();
 
     if (player === "rock"){
         if (computer === "rock"){
@@ -86,3 +86,21 @@ function playGame(){
 }
 
 playGame()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
