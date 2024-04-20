@@ -1,93 +1,129 @@
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorsBtn = document.querySelector("#scissors");
+
+const roundResult = document.querySelector("#round-result");
+const playerScore = document.querySelector("#player-score");
+const computerScore = document.querySelector("#computer-score");
+const finalResult = document.querySelector("#final-result");
+
 function getComputerChoice(){
     choicesArray = ["rock", "paper", "scissors"];
     i = Math.floor(Math.random()*3);
-    return choicesArray[i]
+    return choicesArray[i];
 }
 
+function playerScoreUp(){
+    playerScore.textContent = Number(playerScore.textContent) + 1;
+}
+
+function computerScoreUp(){
+    computerScore.textContent = Number(computerScore.textContent) + 1;
+}
+
+
 function playRound(playerSelection){
-    const player = playerSelection.toLowerCase();
-    const computer = getComputerChoice();
+    let player = playerSelection.toLowerCase();
+    let computer = getComputerChoice();
 
     if (player === "rock"){
         if (computer === "rock"){
-            return "Tie!";
+            roundResult.textContent = "Tie!";
         }
-        if (computer === "scissor"){
-            return "You Win! Rock beats Scissor";
+        if (computer === "scissors"){
+            roundResult.textContent = "You Win! Rock beats Scissor";
+            playerScoreUp();
         }
         if (computer === "paper"){
-            return "You Lose! Paper beats Rock";
+            roundResult.textContent = "You Lose! Paper beats Rock";
+            computerScoreUp();
         }
+        
     }
+
 
     if (player === "paper"){
         if (computer === "rock"){
-            return "You Win! Paper beats Rock";
+            roundResult.textContent = "You Win! Paper beats Rock";
+            playerScoreUp();
+
         }
-        if (computer === "scissor"){
-            return "You Lose! Scissor beats Paper";
+        if (computer === "scissors"){
+            roundResult.textContent = "You Lose! Scissor beats Paper";
+            computerScoreUp();
         }
         if (computer === "paper"){
-            return "Tie!";
+            roundResult.textContent = "Tie!";
         }
     }
 
-    if (player === "scissor"){
-        if (computer === "scissor"){
-            return "Tie!";
+    if (player === "scissors"){
+        if (computer === "scissors"){
+            roundResult.textContent = "Tie!";
         }
         if (computer === "rock"){
-            return "You Lose! Rock beats Scissor";
+            roundResult.textContent = "You Lose! Rock beats Scissors";
+            computerScoreUp();
         }
         if (computer === "paper"){
-            return "You Win! Scissor beats Paper";
+            roundResult.textContent = "You Win! Scissors beats Paper";
+            playerScoreUp();
         }
     }
-
-
-
-
-
+    
 }  
 
-function playGame(){
-    let playerScore = 0;
-    let computerScore = 0;
-    
-    for (let i = 0; i < 5; i++) {
-        let player = prompt("player input: ");
-        let computer = getComputerChoice();
-        let result = playRound(player, computer);
-        console.log(result)
-        if (result.includes("Win!")){
-            playerScore += 1;
-        }
-        else{
-            if (result.includes("Lose!")){
-                computerScore += 1;
-            }
-            else{
-                continue;
-            }
-        }
 
-    }
-    if (playerScore > computerScore){
-        console.log("Final result: You are the Winner!")
+rockBtn.addEventListener("click", ()=>{
+    if (playerScore.textContent==="5" || computerScore.textContent==="5"){
+        displayResult();
+        return;
+    } 
+    playRound("rock");
+})
+paperBtn.addEventListener("click", ()=>{
+    if (playerScore.textContent==="5" || computerScore.textContent==="5"){
+        displayResult();
+        return;
+    } 
+    playRound("paper");
+})
+scissorsBtn.addEventListener("click", ()=>{
+    if (playerScore.textContent==="5" || computerScore.textContent==="5"){
+        displayResult();
+        return;
+    } 
+    playRound("scissors");
+})
+
+// need to be implemented such that if anyone reaches score 5, its over
+
+function displayResult(){
+    if (Number(playerScore.textContent) > Number(computerScore.textContent)){
+        finalResult.textContent = "You are the Winner!";
     }
     else{
-        if (playerScore < computerScore){
-            console.log("Final result: You lost!")
+        if (Number(playerScore.textContent) < Number(computerScore.textContent)){
+            finalResult.textContent = "You lost!";
         }
         else{
-            console.log("Final result: Tie!")
+            finalResult.textContent = "Tie!";
         }
     }
 }
 
-playGame()
 
 
+
+
+
+
+
+
+
+//New UI feature
+
+// HTML reference Nodes
 
 
 
