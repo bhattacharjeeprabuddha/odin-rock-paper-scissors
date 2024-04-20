@@ -5,7 +5,7 @@ const scissorsBtn = document.querySelector("#scissors");
 const roundResult = document.querySelector("#round-result");
 const playerScore = document.querySelector("#player-score");
 const computerScore = document.querySelector("#computer-score");
-const finalResult = document.querySelector("#final-score");
+const finalResult = document.querySelector("#final-result");
 
 function getComputerChoice(){
     choicesArray = ["rock", "paper", "scissors"];
@@ -38,7 +38,7 @@ function playRound(playerSelection){
             roundResult.textContent = "You Lose! Paper beats Rock";
             computerScoreUp();
         }
-        return;
+        
     }
 
 
@@ -70,34 +70,47 @@ function playRound(playerSelection){
             playerScoreUp();
         }
     }
+    
 }  
 
 
 rockBtn.addEventListener("click", ()=>{
+    if (playerScore.textContent==="5" || computerScore.textContent==="5"){
+        displayResult();
+        return;
+    } 
     playRound("rock");
 })
 paperBtn.addEventListener("click", ()=>{
+    if (playerScore.textContent==="5" || computerScore.textContent==="5"){
+        displayResult();
+        return;
+    } 
     playRound("paper");
 })
 scissorsBtn.addEventListener("click", ()=>{
+    if (playerScore.textContent==="5" || computerScore.textContent==="5"){
+        displayResult();
+        return;
+    } 
     playRound("scissors");
 })
 
-    
-if (Number(playerScore) > Number(computerScore)){
-    finalResult.textContent = "Final result: You are the Winner!";
-}
-else{
-    if (Number(playerScore) < Number(computerScore)){
-        finalResult.textContent = "Final result: You lost!";
+// need to be implemented such that if anyone reaches score 5, its over
+
+function displayResult(){
+    if (Number(playerScore.textContent) > Number(computerScore.textContent)){
+        finalResult.textContent = "You are the Winner!";
     }
     else{
-        finalResult.textContent = "Final result: Tie!";
+        if (Number(playerScore.textContent) < Number(computerScore.textContent)){
+            finalResult.textContent = "You lost!";
+        }
+        else{
+            finalResult.textContent = "Tie!";
+        }
     }
 }
-
-
-
 
 
 
